@@ -30,6 +30,7 @@ public class MyWorld extends World
     }
 
     public void startGame() {
+        Butterfly.laserButterfly = 10;
         for(int i = 0; i < 10; i++){
             Butterfly fly = new Butterfly();
             fly.getImage().scale(20, 20);
@@ -68,15 +69,16 @@ public class MyWorld extends World
         }
         else if(state == PLAYING){
             List butterflyList = getObjects(Butterfly.class);
-            if(butterflyList.isEmpty() && Butterfly.laserButterfly < 10){
+            if(butterflyList.size() < Butterfly.laserButterfly){
                 cleanUp();
-                GameOver g = new GameOver();
-                state = GAMEOVER;
-                addObject(g, getWidth()/2, getHeight()/2);
-            }
-            if(butterflyList.isEmpty() && Butterfly.laserButterfly == 10){
+                displayGameOver();
+            }else if(butterflyList.isEmpty() && Butterfly.laserButterfly == 0){
                 state = NEXTLEVEL;
                 moveLevel();
+            }
+            if (getObjects(Player.class).size() == 0) {
+                cleanUp();
+                displayGameOver();
             }
         }
         else if(state == NEXTLEVEL){
@@ -92,6 +94,12 @@ public class MyWorld extends World
         }
     }
 
+    private void displayGameOver() {
+        GameOver g = new GameOver();
+        state = GAMEOVER;
+        addObject(g, getWidth()/2, getHeight()/2);
+    }
+
     public int getState(){
         return state;
     }
@@ -101,7 +109,7 @@ public class MyWorld extends World
             Butterfly fly = new Butterfly();
             fly.getImage().scale(20, 20);
             addObject(fly, fly.getImage().getWidth()/2 + i*fly.getImage().getWidth(), fly.getImage().getHeight()/2);
-            
+
         }
         Butterfly.laserButterfly = 10;
     }
@@ -110,6 +118,6 @@ public class MyWorld extends World
         removeObjects(getObjects(Mushroom.class));
         removeObjects(getObjects(Player.class));
         removeObjects(getObjects(Laser.class));
-
+        removeObjects(getObjects(Butterfly.class));
     }
 }

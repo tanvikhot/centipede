@@ -1,9 +1,8 @@
-
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Hawk here.
- * 
- * @author (your name) 
+ *
+ * @author (your name)
  * @version (a version number or a date)
  */
 public class Butterfly extends Actor
@@ -13,7 +12,7 @@ public class Butterfly extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public static int laserButterfly = 10;
-    public void act(){ 
+    public void act(){
         int dx = getImage().getWidth();
         // Add your action code here.
         if(Greenfoot.isKeyDown("p")){
@@ -47,10 +46,12 @@ public class Butterfly extends Actor
                 getWorld().addObject(m, getX(), getY());
                 removeTouching(Laser.class);
                 getWorld().removeObject(this);
-
-            }else if(getY() > getWorld().getHeight()){ 
-                getWorld().removeObject(this);
                 laserButterfly--;
+                System.out.println("Decrementing laserButterfly " + laserButterfly);
+            }else if(getY() > getWorld().getHeight()){
+                getWorld().removeObject(this);
+            }else if (isTouching(Player.class)) {
+                getWorld().removeObjects(getWorld().getObjects(Player.class));
             }
         }
     }
