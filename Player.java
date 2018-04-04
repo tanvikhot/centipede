@@ -51,7 +51,7 @@ public class Player extends Actor
         }
         if(Greenfoot.isKeyDown("space")){
             List laserList = getWorld().getObjects(Laser.class);
-            if(laserList.isEmpty()){
+            if(laserList.isEmpty()) {
                 Laser l = new Laser();
                 l.getImage().scale(20,20);
                 getWorld().addObject(l, getX(), getY()); 

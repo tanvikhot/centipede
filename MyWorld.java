@@ -38,21 +38,37 @@ public class MyWorld extends World
 
         }
         for(int i = 0; i < 30; i++){
-            Mushroom m = new Mushroom();
-            m.getImage().scale(20,20);
-            int imageHeight = m.getImage().getHeight();
-            int imageWidth = m.getImage().getWidth();
-            int x = 0;
-            int y = 0;
-            addObject(m, Greenfoot.getRandomNumber(getWidth()/imageWidth-1)*imageWidth+imageWidth*3/2,
-                Greenfoot.getRandomNumber(getHeight()/imageHeight-1)*imageHeight+imageHeight*3/2);
-
-            if( getObjectsAt(m.getX(), m.getY(), Mushroom.class) == null){
-                x = Greenfoot.getRandomNumber((getWidth()/imageWidth-1)*imageWidth+imageWidth*3/2);
-                y = Greenfoot.getRandomNumber((getHeight()/imageHeight-1)*imageHeight+imageHeight*3/2);
+            if(i%4 != 0){
+                Mushroom m = new Mushroom();
+                m.getImage().scale(20,20);
+                int imageHeight = m.getImage().getHeight();
+                int imageWidth = m.getImage().getWidth();
+                int x = 0;
+                int y = 0;
+                addObject(m, Greenfoot.getRandomNumber(getWidth()/imageWidth-1)*imageWidth+imageWidth*3/2,
+                    Greenfoot.getRandomNumber(getHeight()/imageHeight-1)*imageHeight+imageHeight*3/2);
+    
+                if( getObjectsAt(m.getX(), m.getY(), Mushroom.class) == null){
+                    x = Greenfoot.getRandomNumber((getWidth()/imageWidth-1)*imageWidth+imageWidth*3/2);
+                    y = Greenfoot.getRandomNumber((getHeight()/imageHeight-1)*imageHeight+imageHeight*3/2);
+                }
+                addObject(m, x,y); 
+            }else{
+                Shamrock s = new Shamrock();
+                s.getImage().scale(20,20);
+                int imageHeight = s.getImage().getHeight();
+                int imageWidth = s.getImage().getWidth();
+                int x = 0;
+                int y = 0;
+                addObject(s, Greenfoot.getRandomNumber(getWidth()/imageWidth-1)*imageWidth+imageWidth*3/2,
+                    Greenfoot.getRandomNumber(getHeight()/imageHeight-1)*imageHeight+imageHeight*3/2);
+    
+                if( getObjectsAt(s.getX(), s.getY(), Mushroom.class) == null){
+                    x = Greenfoot.getRandomNumber((getWidth()/imageWidth-1)*imageWidth+imageWidth*3/2);
+                    y = Greenfoot.getRandomNumber((getHeight()/imageHeight-1)*imageHeight+imageHeight*3/2);
+                }
+                addObject(s, x,y); 
             }
-            addObject(m, x,y); 
-
         }
         Player p = new Player();
         p.getImage().scale(20,20);
@@ -116,6 +132,7 @@ public class MyWorld extends World
 
     private void cleanUp(){
         removeObjects(getObjects(Mushroom.class));
+        removeObjects(getObjects(Shamrock.class));
         removeObjects(getObjects(Player.class));
         removeObjects(getObjects(Laser.class));
         removeObjects(getObjects(Butterfly.class));

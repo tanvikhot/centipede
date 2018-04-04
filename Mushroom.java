@@ -17,21 +17,26 @@ public class Mushroom extends Actor
      * Act - do whatever the mushroom wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    int i = 1;
+    public int i = 1;
     public void act() 
     {
         // Add your action code here.
         if(((MyWorld)getWorld()).getState() == NEXTLEVEL){
-            setImage("mushroom.png");
+            setImage(getImage());
             getImage().scale(20, 20);
         }else if(((MyWorld)getWorld()).getState() == PLAYING){
             if(isTouching(Laser.class)){
                 getImage().scale(20, getImage().getHeight()- 4);
                 removeTouching(Laser.class);
-                if(getImage().getHeight() == 4){
-                    getWorld().removeObject(this);   
-                }
+                removeSelfIfTooSmall();
+
             }
         }
-    }    
+    }
+
+    protected void removeSelfIfTooSmall() {
+        if(getImage().getHeight() == 4){
+            getWorld().removeObject(this);   
+        }
+    }
 }

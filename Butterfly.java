@@ -13,7 +13,7 @@ public class Butterfly extends Actor
      */
     public static int laserButterfly = 10;
     public void act(){
-        int dx = getImage().getWidth();
+        int dx = getImage().getWidth()/4;
         // Add your action code here.
         if(Greenfoot.isKeyDown("p")){
             dx = 0;
@@ -47,7 +47,6 @@ public class Butterfly extends Actor
                 removeTouching(Laser.class);
                 getWorld().removeObject(this);
                 laserButterfly--;
-                System.out.println("Decrementing laserButterfly " + laserButterfly);
             }else if(getY() > getWorld().getHeight()){
                 getWorld().removeObject(this);
             }else if (isTouching(Player.class)) {

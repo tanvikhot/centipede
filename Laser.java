@@ -8,6 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Laser extends Actor
 {
+    public Laser(int rotation) {
+        setRotation(rotation);
+    }
+    
+    public Laser() {
+        setRotation(270);
+    }
+        
     /**
      * Act - do whatever the Laser wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -18,8 +26,9 @@ public class Laser extends Actor
     {
         // Add your action code here.
 
-        setLocation(getX(), getY() - dy);
-        if(getY() <= 0){
+        // setLocation(getX(), getY() - dy);
+        move(dy);
+        if(isAtEdge()){
            getWorld().removeObject(this);
         }
     }
