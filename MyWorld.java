@@ -19,12 +19,15 @@ public class MyWorld extends World
     private final int NEXTLEVEL = 3;
     private int state = MENU; // Begin in MENU state
     private boolean enterPressed = false;
-
+    int time = 0;
+    Text timer;
+    int a = 0;
     int startLaser = 0;
     public MyWorld()
     {    
         super(400,600, 1,false); 
-
+        timer = new Text(String.valueOf(time));
+        addObject(timer, timer.getImage().getWidth(), getHeight() - timer.getImage().getHeight());
         Title t = new Title();
         addObject(t, getWidth()/2, getHeight()/2);
     }
@@ -47,7 +50,7 @@ public class MyWorld extends World
                 int y = 0;
                 addObject(m, Greenfoot.getRandomNumber(getWidth()/imageWidth-1)*imageWidth+imageWidth*3/2,
                     Greenfoot.getRandomNumber(getHeight()/imageHeight-1)*imageHeight+imageHeight*3/2);
-    
+
                 if( getObjectsAt(m.getX(), m.getY(), Mushroom.class) == null){
                     x = Greenfoot.getRandomNumber((getWidth()/imageWidth-1)*imageWidth+imageWidth*3/2);
                     y = Greenfoot.getRandomNumber((getHeight()/imageHeight-1)*imageHeight+imageHeight*3/2);
@@ -62,7 +65,7 @@ public class MyWorld extends World
                 int y = 0;
                 addObject(s, Greenfoot.getRandomNumber(getWidth()/imageWidth-1)*imageWidth+imageWidth*3/2,
                     Greenfoot.getRandomNumber(getHeight()/imageHeight-1)*imageHeight+imageHeight*3/2);
-    
+
                 if( getObjectsAt(s.getX(), s.getY(), Mushroom.class) == null){
                     x = Greenfoot.getRandomNumber((getWidth()/imageWidth-1)*imageWidth+imageWidth*3/2);
                     y = Greenfoot.getRandomNumber((getHeight()/imageHeight-1)*imageHeight+imageHeight*3/2);
@@ -77,6 +80,11 @@ public class MyWorld extends World
     }
 
     public void act() {
+        a++;
+        if(a%60 == 0){
+            time++;
+            timer.setContent(String.valueOf(time)); 
+        }
         if(state == MENU){
             if(Greenfoot.isKeyDown("enter")){
                 state = PLAYING;
